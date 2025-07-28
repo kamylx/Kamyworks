@@ -1,0 +1,35 @@
+/* static/css/main.css */
+
+body {
+    margin-top: 60px; /* Para não sobrepor o navbar fixo */
+    background: #f4f4f4;
+    color: #333333;
+}
+
+.site-header {
+    background-color: #343a40; /* Cor de fundo para o cabeçalho */
+}
+
+.navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link {
+    color: #cccccc !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.alert {
+    margin-top: 15px;
+}

@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold text-blue-800 mb-6">Editar Partida</h1>
+
+    <div class="bg-blue-50 p-6 rounded-lg shadow-md mb-8 max-w-2xl mx-auto">
+        <h2 class="text-2xl font-semibold text-blue-700 mb-4">Editar Partida #{{ match_id }}</h2>
+        <form method="POST" class="space-y-4">
+            {{ form.csrf_token }}
+            <div>
+                {{ form.date.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.date(class="form-input", type="text", placeholder="DD/MM/AAAA") }}
+                {% for error in form.date.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.time.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.time(class="form-input", type="time") }}
+                {% for error in form.time.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.team_home_name.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.team_home_name(class="form-input") }}
+                {% for error in form.team_home_name.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.team_away_name.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.team_away_name(class="form-input") }}
+                {% for error in form.team_away_name.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    {{ form.score_home.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                    {{ form.score_home(class="form-input") }}
+                    {% for error in form.score_home.errors %}
+                        <span class="text-red-500 text-xs italic">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.score_away.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                    {{ form.score_away(class="form-input") }}
+                    {% for error in form.score_away.errors %}
+                        <span class="text-red-500 text-xs italic">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                {{ form.location.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.location(class="form-input") }}
+                {% for error in form.location.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="flex items-center">
+                {{ form.is_home_game(class="mr-2") }}
+                {{ form.is_home_game.label(class="text-gray-700 text-sm font-bold") }}
+                {% for error in form.is_home_game.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.notes.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.notes(class="form-input h-24 resize-y") }}
+                {% for error in form.notes.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.match_link.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.match_link(class="form-input", placeholder="Ex: https://youtube.com/video_do_jogo") }}
+                {% for error in form.match_link.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.game_segments.label(class="block text-gray-700 text-sm font-bold mb-2") }} {# <-- NOVO CAMPO AQUI #}
+                {{ form.game_segments(class="form-input h-24 resize-y", placeholder="Ex: Jogo 1: 00:00 - 15:00\nJogo 2: 15:00 - 30:00") }} {# <-- NOVO CAMPO AQUI #}
+                {% for error in form.game_segments.errors %}
+                    <span class="text-red-500 text-xs italic">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="flex justify-between items-center">
+                {{ form.submit(class="btn-primary") }}
+                <a href="{{ url_for('main.matches') }}" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

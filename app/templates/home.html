@@ -1,0 +1,164 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+        {# Conteúdo para usuários logados (seu dashboard simples) #}
+        <div class="content-section bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto mt-10 text-center">
+            <h1 class="text-3xl font-bold text-primary mb-4">Bem-vindo, {{ current_user.username }}!</h1>
+            <p class="text-lg text-gray-700 mb-6">Você está logado no CoachView. Explore suas análises e gerencie sua equipe.</p>
+            <div class="space-x-4">
+                <a href="{{ url_for('main.matches') }}" class="btn-primary">Ver Partidas</a>
+                <a href="{{ url_for('main.register') }}" class="btn-secondary">Registrar Jogador</a>
+                <a href="{{ url_for('main.submit_video') }}" class="btn-secondary">Analisar Vídeo</a>
+                <a href="{{ url_for('main.logout') }}" class="btn-secondary">Sair</a>
+            </div>
+        </div>
+    {% else %}
+        {# Conteúdo da Landing Page para usuários não logados #}
+
+        <!-- Seção Hero (Proposta de Valor Clara) -->
+        <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 px-4 text-center -mx-4 md:rounded-lg">
+            <div class="container mx-auto">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+                    CoachView: A Análise de Handebol que Transforma seu Jogo.
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                    Desvende cada lance, otimize estratégias e eleve o desempenho da sua equipe com scouts detalhados gerados por Inteligência Artificial.
+                </p>
+                <div class="space-x-4">
+                    <a href="{{ url_for('main.register_coach') }}" class="btn-primary">Criar Conta Grátis</a>
+                    <a href="#features" class="btn-secondary border-white text-white hover:bg-white hover:text-primary">Saiba Mais</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Apresentação Visual (Placeholder) -->
+        <section class="py-16 px-4 bg-white -mx-4 md:rounded-lg md:mt-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold text-dark mb-8">Veja o CoachView em Ação</h2>
+                <p class="text-lg text-gray-700 mb-12 max-w-4xl mx-auto">
+                    Explore a interface intuitiva e a profundidade dos relatórios de scouts que nossa IA pode gerar para você.
+                </p>
+                <div class="bg-gray-200 rounded-lg shadow-xl overflow-hidden aspect-video max-w-5xl mx-auto flex items-center justify-center text-gray-600 text-xl">
+                    <img src="https://placehold.co/1280x720/E0E7FF/3B82F6?text=V%C3%ADdeo+Demonstrativo+ou+Screenshots" alt="Vídeo Demonstrativo ou Screenshots do Aplicativo" class="w-full h-auto object-cover">
+                </div>
+                <p class="mt-8 text-gray-600">
+                    *Substitua esta imagem por um vídeo real ou capturas de tela do seu aplicativo.
+                </p>
+            </div>
+        </section>
+
+        <!-- Seção de Recursos e Benefícios Chave -->
+        <section id="features" class="py-16 px-4 bg-secondary -mx-4 md:rounded-lg md:mt-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold text-dark mb-12">Recursos e Benefícios Chave</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <div class="text-primary text-5xl mb-4">📊</div>
+                        <h3 class="text-2xl font-semibold mb-3">Análise Detalhada</h3>
+                        <p class="text-gray-700">Gols, arremessos, defesas, posse de bola e muito mais, com precisão de IA.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <div class="text-primary text-5xl mb-4">📈</div>
+                        <h3 class="text-2xl font-semibold mb-3">Relatórios Personalizados</h3>
+                        <p class="text-gray-700">Dados específicos para cada jogador e para a equipe, focados no seu desenvolvimento.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <div class="text-primary text-5xl mb-4">🎯</div>
+                        <h3 class="text-2xl font-semibold mb-3">Otimização Tática</h3>
+                        <p class="text-gray-700">Identifique padrões de jogo, pontos fortes e áreas de melhoria para suas estratégias.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <div class="text-primary text-5xl mb-4">⏱️</div>
+                        <h3 class="text-2xl font-semibold mb-3">Economia de Tempo</h3>
+                        <p class="text-gray-700">Deixe a inteligência artificial fazer o trabalho pesado de scout, liberando você para treinar.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <div class="text-primary text-5xl mb-4">🔗</div>
+                        <h3 class="text-2xl font-semibold mb-3">Acesso a Qualquer Vídeo</h3>
+                        <p class="text-gray-700">Basta um link do YouTube para começar a análise, sem complicações.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <div class="text-primary text-5xl mb-4">🔒</div>
+                        <h3 class="text-2xl font-semibold mb-3">Dados Seguros</h3>
+                        <p class="text-gray-700">Seus relatórios e informações protegidos com sistema de login e privacidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção "Loja/Mostruário de Equipamentos" (Vitrine) -->
+        <section id="showcase" class="py-16 px-4 bg-white -mx-4 md:rounded-lg md:mt-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold text-dark mb-12">Equipe-se para Vencer!</h2>
+                <p class="text-lg text-gray-700 mb-12 max-w-4xl mx-auto">
+                    Aprimore seu desempenho com os melhores equipamentos de handebol. Conheça nossa seleção de produtos essenciais para jogadores e treinadores.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/400x300/F0F4F8/3B82F6?text=Bola+de+Handebol" alt="Bola de Handebol" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Bolas de Alta Performance</h3>
+                        <p class="text-gray-700 mb-4">Descubra a bola ideal para cada tipo de treino e jogo, com aderência e durabilidade superiores.</p>
+                        <a href="#" class="btn-secondary text-sm">Saiba Mais</a>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/400x300/F0F4F8/3B82F6?text=Cal%C3%A7ados+de+Handebol" alt="Calçados de Handebol" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Calçados Específicos</h3>
+                        <p class="text-gray-700 mb-4">Garanta agilidade e estabilidade com tênis projetados para os movimentos dinâmicos do handebol.</p>
+                        <a href="#" class="btn-secondary text-sm">Saiba Mais</a>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/400x300/F0F4F8/3B82F6?text=Acess%C3%B3rios+de+Treino" alt="Acessórios de Treino" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Acessórios Essenciais</h3>
+                        <p class="text-gray-700 mb-4">Proteções, munhequeiras, e vestuário que otimizam seu conforto e desempenho em quadra.</p>
+                        <a href="#" class="btn-secondary text-sm">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Galeria de Fotos de Times/Jogadores de Handebol -->
+        <section id="gallery" class="py-16 px-4 bg-secondary -mx-4 md:rounded-lg md:mt-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold text-dark mb-12">Inspire-se no Jogo!</h2>
+                <p class="text-lg text-gray-700 mb-12 max-w-4xl mx-auto">
+                    Momentos épicos e a paixão do handebol capturados em imagens que motivam e inspiram.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/600x400/D1E0FF/3B82F6?text=A%C3%A7%C3%A3o+de+Jogo" alt="Ação de Jogo de Handebol" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/600x400/D1E0FF/3B82F6?text=Goleiro+Defendendo" alt="Goleiro de Handebol Defendendo" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/600x400/D1E0FF/3B82F6?text=Time+Celebrando" alt="Time de Handebol Celebrando" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/600x400/D1E0FF/3B82F6?text=T%C3%A1tica+em+Quadra" alt="Tática de Handebol em Quadra" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/600x400/D1E0FF/3B82F6?text=Arremesso+Potente" alt="Arremesso Potente de Handebol" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/600x400/D1E0FF/3B82F6?text=Ataque+R%C3%A1pido" alt="Ataque Rápido de Handebol" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Chamada para Ação Final -->
+        <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20 px-4 text-center -mx-4 md:rounded-lg md:mt-8">
+            <div class="container mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Pronto para Transformar sua Análise de Handebol?</h2>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
+                    Junte-se a treinadores que estão elevando o nível de suas equipes com insights baseados em dados.
+                </p>
+                <div class="space-x-4">
+                    <a href="{{ url_for('main.login') }}" class="btn-primary bg-white text-primary hover:bg-gray-100">Entrar Agora</a>
+                    <a href="{{ url_for('main.register_coach') }}" class="btn-secondary border-white text-white hover:bg-white hover:text-primary">Criar Minha Conta Grátis</a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}
