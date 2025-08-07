@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold text-blue-800 mb-6">Partidas</h1>
+
+    <div class="mb-8 text-right">
+        <a href="{{ url_for('main.add_match') }}" class="btn-primary inline-flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+            Adicionar Nova Partida
+        </a>
+    </div>
+
+    <h2 class="text-2xl font-semibold text-blue-800 mb-4">Partidas Registradas</h2>
+    {% if matches %}
+        <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+            <table class="min-w-full leading-normal">
+                <thead>
+                    <tr>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tl-lg">Data</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Hora</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Time da Casa</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Placar</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Time Visitante</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Local</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Observações</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Link do Jogo</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Segmentos do Jogo</th>
+
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tr-lg">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for match in matches %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {{ match.formatted_date }} 
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ match.time }}</td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ match.team_home_name }}</td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold text-blue-700">{{ match.score_home }} x {{ match.score_away }}</td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ match.team_away_name }}</td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ match.location }}</td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ match.notes }}</td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {% if match.match_link %}
+                                <a href="{{ match.match_link }}" target="_blank" class="text-blue-600 hover:underline">Ver</a>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ match.game_segments if match.game_segments else 'N/A' }} </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm whitespace-nowrap">
+                            <a href="{{ url_for('main.match_events', match_id=match.id) }}" class="text-green-600 hover:text-green-900 mr-3">Ver Eventos</a>
+                            <a href="{{ url_for('main.edit_match', match_id=match.id) }}" class="text-blue-600 hover:text-blue-900 mr-3">Editar</a>
+                            <form action="{{ url_for('main.delete_match', match_id=match.id) }}" method="POST" class="inline" onsubmit="return confirm('Tem certeza que deseja excluir esta partida?');">
+                                <button type="submit" class="text-red-600 hover:text-red-900 focus:outline-none">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-gray-600">Nenhuma partida registrada ainda. Use o formulário acima para adicionar uma!</p>
+    {% endif %}
+{% endblock %}
