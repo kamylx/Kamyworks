@@ -21,6 +21,9 @@ def create_app():
     app.config['SECRET_KEY'] = 'CoachView123' 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db' 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    #app.config['UPLOAD_FOLDER'] = 'uploads'
+    #app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
     
     db.init_app(app)
     login_manager.init_app(app)
